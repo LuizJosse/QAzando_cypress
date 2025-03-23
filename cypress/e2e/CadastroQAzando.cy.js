@@ -6,6 +6,7 @@ describe('Cadastro', () => {
     beforeEach(() => {
         cy.visit('https://automationpratice.com.br/'); 
         cy.get('.fa-lock').click(); 
+        cy.viewport(1366, 800);
     });
 
     it('Cadastro com sucesso', () => {
