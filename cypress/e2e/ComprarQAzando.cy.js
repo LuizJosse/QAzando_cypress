@@ -74,4 +74,20 @@ describe('Adicionar ao carringo', () => {
         cy.get(':nth-child(1) > .product_wrappers_list > .row > .col-lg-9 > .content > .add-to-cart').click()
         cy.get('#swal2-title').should('have.text', 'Failed!');
       });
+
+      it('Limpar Carrinho pela lista de exibição', () => {
+        cy.visit('https://automationpratice.com.br/my-account'); 
+        cy.get('.has-dropdown.has-megaitem > a').realHover();
+        cy.get('.mega-menu').should('be.visible');
+        cy.wait(500);
+        cy.contains('a', 'Shop List View').click({ force: true });
+        cy.url().should('include', '/shoplist');
+        cy.get(':nth-child(1) > .product_wrappers_list > .row > .col-lg-9 > .content > .add-to-cart').click()
+        cy.get('#swal2-title').should('have.text', 'Success!');
+        cy.get('#swal2-title', { timeout: 10000 }).should('not.exist');  // Aumenta o timeout para 10 segundos
+        cy.get('.col-12 > .header-action-link > :nth-child(2) > .offcanvas-toggle > .fa').click()
+        cy.get('.offcanvas-cart-action-button > :nth-child(1) > .theme-btn-one').click()
+        cy.get('.cart_submit > .theme-btn-one').click()
+        cy.get('.empaty_cart_area > h3').should('have.text', 'Sorry Mate... No Item Found Inside Your Cart!');
+      });
 });
