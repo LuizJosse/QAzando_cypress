@@ -5,6 +5,7 @@ describe('Login', () => {
     beforeEach(() => {
         cy.visit('https://automationpratice.com.br/'); 
         cy.get('.fa-user').click(); 
+        cy.viewport(1366, 800);
     });
 
     it('Login com Sucesso', () => {
@@ -42,5 +43,5 @@ describe('Login', () => {
         cy.get('.invalid_input').should("have.text", "Senha inválida.")
         
       });
-  
+      
   });
